@@ -8,9 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.thea.weather.utils.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
     private WeatherRequest mWeatherRequest;
 
     private AppCompatSpinner mTitleSpinner;
+
+    private AdapterView.OnItemSelectedListener mItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            LogUtils.i(TAG, "onItemSelected");
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     private Response.Listener<JSONObject> mListener = new Response.Listener<JSONObject>() {
         @Override
@@ -53,19 +69,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        initActionBar();
 
-//        mTitleSpinner = (AppCompatSpinner) findViewById(R.id.acs_titles);
-//        mTitleSpinner.setAdapter(new TitleSpinnerAdapter());
+        mTitleSpinner = (AppCompatSpinner) findViewById(R.id.acs_titles);
+        initActionBarAndTitle();
+
         mWeatherRequest = new WeatherRequest(this);
     }
 
-    private void initActionBar() {
+    private void initActionBarAndTitle() {
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        if (actionBar != null)
             actionBar.setDisplayShowTitleEnabled(false);
-        }
 
+        ArrayAdapter adapter = new ArrayAdapter<>(this,
+                R.layout.title_spinner_item_actionbar, items);
+        adapter.setDropDownViewResource(R.layout.title_spinner_item);
+        mTitleSpinner.setAdapter(adapter);
+        mTitleSpinner.setOnItemSelectedListener(mItemSelectedListener);
     }
 
     @Override

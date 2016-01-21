@@ -22,11 +22,11 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:title="宁波">
-            <!--<android.support.v7.widget.AppCompatSpinner
+            <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/acs_titles"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:theme="@style/Theme.Title.Spinner"/>-->
+                app:theme="@style/Theme.Title.Spinner"/>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
