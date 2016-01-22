@@ -217,11 +217,12 @@
 
             <TextView
                 android:id="@+id/tv_air_quality"
-                android:layout_width="wrap_content"
+                android:layout_width="56dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_environment_icon"
                 android:layout_marginTop="@dimen/normal_vertical_margin"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:textColor="@color/white_alpha50"
                 android:text="@string/heavy_pollution"/>
 

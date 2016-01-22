@@ -13,6 +13,8 @@
     <string name="thursday">THU</string>
     <string name="friday">FRI</string>
     <string name="saturday">SAT</string>
+
+    <string name="weather">weather</string>
     
     <string name="highest">Highest</string>
     <string name="lowest">Lowest</string>
@@ -20,7 +22,18 @@
     <string name="comfortable">Comfortable</string>
     <string name="wind_direction">Direction</string>
     <string name="wind_power">Power</string>
+    <string name="wind_level">Level</string>
     <string name="heavy_pollution">Heavy</string>
 
     <string name="town">TOWN</string>
+
+    <string-array name="day_of_week">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WED</item>
+        <item>THU</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </string-array>
 </resources>

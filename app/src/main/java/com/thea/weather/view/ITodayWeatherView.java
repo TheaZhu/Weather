@@ -5,6 +5,8 @@ package com.thea.weather.view;
  */
 public interface ITodayWeatherView {
 
+    void setCurrent(String temperature, int resId, String weather);
+
     void setTemperatures(String highest, String lowest);
 
     void setHumidity(String level, String value);

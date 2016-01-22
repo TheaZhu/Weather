@@ -15,13 +15,26 @@
     <string name="friday">周五</string>
     <string name="saturday">周六</string>
 
+    <string name="weather">天气</string>
+
     <string name="highest">最高</string>
     <string name="lowest">最低</string>
     <string name="humidity">湿度</string>
     <string name="comfortable">舒适</string>
     <string name="wind_direction">风向</string>
     <string name="wind_power">风力</string>
+    <string name="wind_level">级</string>
     <string name="heavy_pollution">重度污染</string>
 
     <string name="town">地区</string>
+
+    <string-array name="day_of_week">
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+    </string-array>
 </resources>

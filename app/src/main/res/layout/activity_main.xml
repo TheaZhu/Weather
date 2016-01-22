@@ -30,18 +30,11 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <!--<TextView
-        android:id="@+id/tv_current_temperature"
+    <LinearLayout
+        android:id="@+id/ll_daily_weather"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="100sp"
-        android:textColor="@color/white"
-        android:text="4°"/>-->
-
-    <include layout="@layout/week_weather_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="88dp"
+        android:orientation="horizontal"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
