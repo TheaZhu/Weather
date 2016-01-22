@@ -5,6 +5,6 @@ package com.thea.weather.view;
  */
 public interface IDailyWeatherView {
 
-    void setDailyWeather(int index, int day, int resId, String temperatures);
+    void setDailyWeather(int index, int day, String weatherCode, String temperatures);
 
 }

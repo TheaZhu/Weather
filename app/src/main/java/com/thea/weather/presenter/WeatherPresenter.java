@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.thea.weather.R;
-import com.thea.weather.WeatherRequest;
-import com.thea.weather.utils.LogUtils;
+import com.thea.weather.model.WeatherRequest;
 import com.thea.weather.view.IDailyWeatherView;
 import com.thea.weather.view.ITodayWeatherView;
 
@@ -29,9 +27,8 @@ public class WeatherPresenter {
     private WeatherRequest mWeatherRequest;
     private ITodayWeatherView mTodayWeatherView;
     private IDailyWeatherView mDailyWeatherView;
-//    private IWeekWeatherView mWeekWeatherView;
 
-    private String lastUpdateTime;
+    private Calendar lastUpdateTime;
     private JSONArray mHourlyWeather;
 
     private Response.Listener<JSONObject> mListener = new Response.Listener<JSONObject>() {
@@ -56,6 +53,10 @@ public class WeatherPresenter {
         mDailyWeatherView = dailyWeatherView;
     }
 
+    public void init() {
+
+    }
+
     public void refresh(String cityId) {
         mWeatherRequest.get("cityid=" + cityId, mListener, mErrorListener);
     }
@@ -68,18 +69,20 @@ public class WeatherPresenter {
             JSONObject data = jsonArray.getJSONObject(0);
             String status = data.getString("status");
             if (status.equalsIgnoreCase("ok")) {
-                String locTime = data.getJSONObject("basic").getJSONObject("update").getString("loc");
-                extractTodayWeather(data);
-                extractWeekWeather(data);
+                Calendar locTime = stringToTime(data.getJSONObject("basic")
+                        .getJSONObject("update").getString("loc"));
+                if (lastUpdateTime == null || !locTime.equals(lastUpdateTime)) {
+                    extractTodayWeather(data);
+                    extractWeekWeather(data);
+                    mHourlyWeather = data.getJSONArray("hourly_forecast");
+                    lastUpdateTime = locTime;
+                }
             }
             else if (status.equalsIgnoreCase("unknown city")) {
-
             }
             else if (status.equalsIgnoreCase("anr")) {
-
             }
             else {
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -100,26 +103,30 @@ public class WeatherPresenter {
         String airQlty = aqiCity.getString("qlty");
         String pm25 = aqiCity.getString("pm25");
 
-        mTodayWeatherView.setCurrent(temperature, R.mipmap.ic_snowy, weather);
+        mTodayWeatherView.setCurrent(temperature, weatherCode, weather);
         mTodayWeatherView.setHumidity("舒适", humidity);
         mTodayWeatherView.setWind(windDir, windPower);
-        mTodayWeatherView.setEnvironment(airQlty, aqi);
+        mTodayWeatherView.setEnvironment(pm25, airQlty, aqi);
     }
 
     public void extractWeekWeather(JSONObject data) throws JSONException {
         JSONArray dailyForecast = data.getJSONArray("daily_forecast");
-        LogUtils.i(TAG, dailyForecast.length() + "");
 
+        int k = 0;
         for (int i = 0; i < dailyForecast.length(); i++) {
             JSONObject day1 = dailyForecast.getJSONObject(i);
             Calendar date = stringToDate(day1.getString("date"));
             String highest = day1.getJSONObject("tmp").getString("max");
             String lowest = day1.getJSONObject("tmp").getString("min");
-            String weather = day1.getJSONObject("cond").getString("txt_d");
             String weatherCode = day1.getJSONObject("cond").getString("code_d");
 
-            mDailyWeatherView.setDailyWeather(i, date.get(Calendar.DAY_OF_WEEK), R.mipmap.ic_snowy,
-                    highest + "°/" + lowest + "°");
+            if (isSameDay(date, Calendar.getInstance())) {
+                mTodayWeatherView.setTemperatures(highest, lowest);
+                k = 1;
+            }
+            else
+                mDailyWeatherView.setDailyWeather(i - k, date.get(Calendar.DAY_OF_WEEK), weatherCode,
+                        highest + "°/" + lowest + "°");
         }
     }
 

@@ -1,4 +1,4 @@
-package com.thea.weather;
+package com.thea.weather.model;
 
 import android.content.Context;
 

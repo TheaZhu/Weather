@@ -5,7 +5,7 @@ package com.thea.weather.view;
  */
 public interface ITodayWeatherView {
 
-    void setCurrent(String temperature, int resId, String weather);
+    void setCurrent(String temperature, String weatherCode, String weather);
 
     void setTemperatures(String highest, String lowest);
 
@@ -13,5 +13,5 @@ public interface ITodayWeatherView {
 
     void setWind(String direction, String power);
 
-    void setEnvironment(String quality, String aqi);
+    void setEnvironment(String pm25, String quality, String aqi);
 }

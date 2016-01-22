@@ -25,16 +25,18 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/ic_temperature" />
+                android:src="@mipmap/ic_temperature"
+                android:contentDescription="@string/temperature" />
 
             <TextView
                 android:id="@+id/tv_highest_text"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_temperature_icon"
                 android:layout_marginLeft="@dimen/normal_horizontal_margin"
                 android:layout_marginStart="@dimen/normal_horizontal_margin"
                 android:layout_marginTop="@dimen/normal_vertical_margin"
+                android:gravity="center"
                 android:textColor="@color/white_alpha50"
                 android:text="@string/highest"/>
 
@@ -48,12 +50,11 @@
                 android:layout_alignRight="@id/tv_highest_text"
                 android:layout_alignEnd="@id/tv_highest_text"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="8°"/>
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tv_lowest_text"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_temperature_icon"
                 android:layout_alignParentRight="true"
@@ -61,6 +62,7 @@
                 android:layout_marginRight="@dimen/normal_horizontal_margin"
                 android:layout_marginEnd="@dimen/normal_horizontal_margin"
                 android:layout_marginTop="@dimen/normal_vertical_margin"
+                android:gravity="center"
                 android:textColor="@color/white_alpha50"
                 android:text="@string/lowest"/>
 
@@ -74,8 +76,7 @@
                 android:layout_alignRight="@id/tv_lowest_text"
                 android:layout_alignEnd="@id/tv_lowest_text"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="3°"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
         <View
@@ -97,30 +98,26 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/ic_humidity" />
+                android:src="@mipmap/ic_humidity"
+                android:contentDescription="@string/humidity" />
 
             <TextView
                 android:id="@+id/tv_humidity_level"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_humidity_icon"
                 android:layout_marginTop="@dimen/normal_vertical_margin"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/white_alpha50"
-                android:text="@string/comfortable"/>
+                android:gravity="center_horizontal"
+                android:textColor="@color/white_alpha50"/>
 
             <TextView
                 android:id="@+id/tv_humidity"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_humidity_level"
-                android:layout_alignLeft="@id/tv_humidity_level"
-                android:layout_alignStart="@id/tv_humidity_level"
-                android:layout_alignRight="@id/tv_humidity_level"
-                android:layout_alignEnd="@id/tv_humidity_level"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="82%"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -168,30 +165,58 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_centerHorizontal="true"
+                android:contentDescription="@string/wind"
                 android:src="@mipmap/ic_wind" />
+
+            <TextView
+                android:id="@+id/tv_direction_text"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_wind_icon"
+                android:layout_marginLeft="@dimen/normal_horizontal_margin"
+                android:layout_marginStart="@dimen/normal_horizontal_margin"
+                android:layout_marginTop="@dimen/normal_vertical_margin"
+                android:gravity="center"
+                android:textColor="@color/white_alpha50"
+                android:text="@string/wind_direction"/>
 
             <TextView
                 android:id="@+id/tv_wind_direction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_direction_text"
+                android:layout_alignLeft="@+id/tv_direction_text"
+                android:layout_alignStart="@+id/tv_direction_text"
+                android:layout_alignRight="@id/tv_direction_text"
+                android:layout_alignEnd="@id/tv_direction_text"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_power_text"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_wind_icon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="@dimen/normal_horizontal_margin"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
                 android:layout_marginTop="@dimen/normal_vertical_margin"
-                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:textColor="@color/white_alpha50"
-                android:text="东北风"/>
+                android:text="@string/wind_power"/>
 
             <TextView
                 android:id="@+id/tv_wind_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_wind_direction"
-                android:layout_alignLeft="@id/tv_wind_direction"
-                android:layout_alignStart="@id/tv_wind_direction"
-                android:layout_alignRight="@id/tv_wind_direction"
-                android:layout_alignEnd="@id/tv_wind_direction"
+                android:layout_below="@+id/tv_power_text"
+                android:layout_alignLeft="@id/tv_power_text"
+                android:layout_alignStart="@id/tv_power_text"
+                android:layout_alignRight="@id/tv_power_text"
+                android:layout_alignEnd="@id/tv_power_text"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="3级"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
         <View
@@ -216,15 +241,41 @@
                 android:src="@mipmap/ic_environment" />
 
             <TextView
-                android:id="@+id/tv_air_quality"
-                android:layout_width="56dp"
+                android:id="@+id/tv_pm25_text"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_environment_icon"
+                android:layout_marginLeft="@dimen/normal_horizontal_margin"
+                android:layout_marginStart="@dimen/normal_horizontal_margin"
                 android:layout_marginTop="@dimen/normal_vertical_margin"
-                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textColor="@color/white_alpha50"
-                android:text="@string/heavy_pollution"/>
+                android:text="@string/pm25"/>
+
+            <TextView
+                android:id="@+id/tv_pm25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_pm25_text"
+                android:layout_alignLeft="@+id/tv_pm25_text"
+                android:layout_alignStart="@+id/tv_pm25_text"
+                android:layout_alignRight="@id/tv_pm25_text"
+                android:layout_alignEnd="@id/tv_pm25_text"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_air_quality"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_environment_icon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="@dimen/normal_horizontal_margin"
+                android:layout_marginEnd="@dimen/normal_horizontal_margin"
+                android:layout_marginTop="@dimen/normal_vertical_margin"
+                android:gravity="center"
+                android:textColor="@color/white_alpha50"/>
 
             <TextView
                 android:id="@+id/tv_aqi"
@@ -236,8 +287,7 @@
                 android:layout_alignRight="@id/tv_air_quality"
                 android:layout_alignEnd="@id/tv_air_quality"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:text="220"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
     </LinearLayout>

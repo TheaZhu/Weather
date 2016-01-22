@@ -1,5 +1,6 @@
-package com.thea.weather;
+package com.thea.weather.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.thea.weather.R;
 import com.thea.weather.presenter.WeatherPresenter;
 import com.thea.weather.utils.LogUtils;
 import com.thea.weather.view.IDailyWeatherView;
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ITodayWeatherView
     private TextView mCurrentTemperature, mHighestTemperature, mLowestTemperature;
     private TextView mHumidityLevel, mHumidityValue;
     private TextView mWindDirection, mWindPower;
-    private TextView mAirQuality, mAqi;
+    private TextView mPm25, mAirQuality, mAqi;
     private TextView mCurrentWeatherText;
     private ImageView mCurrentWeatherImage;
 
@@ -88,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements ITodayWeatherView
         
         mWindDirection = (TextView) findViewById(R.id.tv_wind_direction);
         mWindPower = (TextView) findViewById(R.id.tv_wind_power);
-        
+
+        mPm25 = (TextView) findViewById(R.id.tv_pm25);
         mAirQuality = (TextView) findViewById(R.id.tv_air_quality);
         mAqi = (TextView) findViewById(R.id.tv_aqi);
     }
@@ -96,11 +100,6 @@ public class MainActivity extends AppCompatActivity implements ITodayWeatherView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        /*MenuItem item = menu.findItem(R.id.action_city);
-        AppCompatSpinner spinner = (AppCompatSpinner) MenuItemCompat.getActionView(item);
-        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                items));*/
         return true;
     }
 
@@ -111,27 +110,27 @@ public class MainActivity extends AppCompatActivity implements ITodayWeatherView
         if (id == R.id.action_refresh) {
             mPresenter.refresh("CN101210401");
         }
-        else if (id == R.id.action_city_management) {
-
-        }
-        else if (id == R.id.action_settings) {
-
-        }
+        else if (id == R.id.action_city_management)
+            startActivity(new Intent(this, CityManagementActivity.class));
+        else if (id == R.id.action_settings)
+            Toast.makeText(this, "功能开发中，敬请期待", Toast.LENGTH_SHORT).show();
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void setCurrent(String temperature, int resId, String weather) {
+    public void setCurrent(String temperature, String weatherCode, String weather) {
         mCurrentTemperature.setText(temperature);
-        mCurrentWeatherImage.setImageResource(resId);
+        mCurrentWeatherImage.setImageResource(getIconFromCode(weatherCode));
         mCurrentWeatherText.setText(weather);
     }
 
     @Override
     public void setTemperatures(String highest, String lowest) {
-        mHighestTemperature.setText(highest + "°");
-        mLowestTemperature.setText(lowest + "°");
+        mHighestTemperature.setText(highest);
+        mHighestTemperature.append(getText(R.string.dc));
+        mLowestTemperature.setText(lowest);
+        mLowestTemperature.append(getText(R.string.dc));
     }
 
     @Override
@@ -148,13 +147,14 @@ public class MainActivity extends AppCompatActivity implements ITodayWeatherView
     }
 
     @Override
-    public void setEnvironment(String quality, String aqi) {
+    public void setEnvironment(String pm25, String quality, String aqi) {
+        mPm25.setText(pm25);
         mAirQuality.setText(quality);
         mAqi.setText(aqi);
     }
 
     @Override
-    public void setDailyWeather(int index, int day, int resId, String temperatures) {
+    public void setDailyWeather(int index, int day, String weatherCode, String temperatures) {
         int childCount = mDailyWeatherLayout.getChildCount();
         View view;
         if (index >= 0 && index < childCount) {
@@ -171,7 +171,11 @@ public class MainActivity extends AppCompatActivity implements ITodayWeatherView
 
         dayText.setText(day2String(day));
         tmpText.setText(temperatures);
-        weatherImage.setImageResource(resId);
+        weatherImage.setImageResource(getIconFromCode(weatherCode));
+    }
+
+    private int getIconFromCode(String weatherCode) {
+        return R.mipmap.ic_snowy;
     }
 
     private CharSequence day2String(int day) {
