@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.thea.weather.model.WeatherRequest;
+import com.thea.weather.model.HttpRequest;
 import com.thea.weather.view.IDailyWeatherView;
 import com.thea.weather.view.ITodayWeatherView;
 
@@ -24,7 +24,7 @@ import java.util.Locale;
 public class WeatherPresenter {
     private static final String TAG = WeatherPresenter.class.getSimpleName();
 
-    private WeatherRequest mWeatherRequest;
+    private HttpRequest mHttpRequest;
     private ITodayWeatherView mTodayWeatherView;
     private IDailyWeatherView mDailyWeatherView;
 
@@ -48,7 +48,7 @@ public class WeatherPresenter {
 
     public WeatherPresenter(Context context, ITodayWeatherView todayWeatherView,
                             IDailyWeatherView dailyWeatherView) {
-        mWeatherRequest = new WeatherRequest(context);
+        mHttpRequest = new HttpRequest(context);
         mTodayWeatherView = todayWeatherView;
         mDailyWeatherView = dailyWeatherView;
     }
@@ -58,7 +58,7 @@ public class WeatherPresenter {
     }
 
     public void refresh(String cityId) {
-        mWeatherRequest.get("cityid=" + cityId, mListener, mErrorListener);
+        mHttpRequest.getWeather(cityId, mListener, mErrorListener);
     }
 
     public void parseResponse(JSONObject response) {

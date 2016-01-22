@@ -5,30 +5,49 @@ package com.thea.weather.bean;
  */
 public class City {
     private String id;
-    private String town;
-    private String region;
-    private String province;
+    private String city;
+    private String cnty;
+    private String prov;
+    private String lat;
+    private String lon;
 
-    public City(String id, String town, String region, String province) {
+    public City(String id, String city, String prov, String cnty) {
         this.id = id;
-        this.town = town;
-        this.region = region;
-        this.province = province;
+        this.city = city;
+        this.cnty = cnty;
+        this.prov = prov;
+    }
+
+    public City(String id, String city, String cnty, String prov, String lat, String lon) {
+        this.id = id;
+        this.city = city;
+        this.cnty = cnty;
+        this.prov = prov;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getTown() {
-        return town;
+    public String getCity() {
+        return city;
     }
 
-    public String getRegion() {
-        return region;
+    public String getCnty() {
+        return cnty;
     }
 
-    public String getProvince() {
-        return province;
+    public String getProv() {
+        return prov;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public String getLon() {
+        return lon;
     }
 }

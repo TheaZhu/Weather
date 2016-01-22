@@ -16,8 +16,8 @@ public class CitySQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table City(" +
-                "cityId VARCHAR(11) primary key, town VARCHAR(40)," +
-                "region VARCHAR(40), province VARCHAR(40)," +
+                "cityId VARCHAR(11) primary key, region VARCHAR(40), " +
+                "province VARCHAR(40), cnty VARCHAR(40), " +
                 "used BOOLEAN default false)");
     }
 
